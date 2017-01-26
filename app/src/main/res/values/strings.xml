@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ITE</string>
+    <string name="events">Eventos</string>
+    <string name="grades">Boletim</string>
+    <string name="solicitations">Solicitações</string>
+    <string name="about">Sobre</string>
+    <string name="exitApp">Deseja sair do aplicativo?</string>
+</resources>
