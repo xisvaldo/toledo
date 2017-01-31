@@ -1,8 +1,30 @@
 <resources>
     <string name="app_name">ITE</string>
+    <string name="connectionError">Não foi possível se conectar. Verifique sua conexão com a internet!</string>
+    <string name="exitApp">Deseja sair do aplicativo?</string>
+
     <string name="events">Eventos</string>
     <string name="grades">Boletim</string>
     <string name="solicitations">Solicitações</string>
     <string name="about">Sobre</string>
-    <string name="exitApp">Deseja sair do aplicativo?</string>
+
+    <string name="loginStudentId">ID do aluno</string>
+    <string name="loginPasswordHint">Senha</string>
+    <string name="loginEnter">ENTRAR</string>
+    <string name="loginStudentIdObligatory">ID do aluno é obrigatório!</string>
+    <string name="loginPasswordObligatory">Senha do aluno é obrigatória!</string>
+    <string name="loginValidatingData">Verificando informações...</string>
+    <string name="generalEmpty">Sem informações para exibir</string>
+    <string name="eventJoin">Participar!</string>
+    <string name="generalSeconds">segundos</string>
+    <string name="generalMinutes">minutos</string>
+    <string name="generalHours">horas</string>
+    <string name="generalDays">dias</string>
+    <string name="generalMonths">meses</string>
+    <string name="generalYears">anos</string>
+    <string name="solicitations_title">Tipo</string>
+    <string name="solicitations_comments">Comentários</string>
+    <string name="solicitations_send">ENVIAR</string>
+    <string name="generalExit">Desejar sair do aplicativo?</string>
+
 </resources>

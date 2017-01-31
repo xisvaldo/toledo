@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.ite">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!--todo: check this <aplication >warning <action android:name="android.intent.action.VIEW"/>-->
     <application
         android:allowBackup="true"

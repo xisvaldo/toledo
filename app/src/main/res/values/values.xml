@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="scrollbar_size">3dp</dimen>
+    <integer name="scrollbar_fadeDuration">1000</integer>
+    <integer name="scrollbar_defaultDelayBeforeFade">750</integer>
+</resources>
