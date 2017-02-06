@@ -16,7 +16,7 @@
             android:id="@+id/base_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:background="@color/green"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -24,10 +24,10 @@
             android:id="@+id/base_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/green"
             app:tabMode="fixed"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/orange"
+            app:tabIndicatorColor="@color/white"
             style="@style/IconTabLayout"
             />
 

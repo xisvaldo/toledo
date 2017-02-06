@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -57,7 +59,7 @@ public class BaseActivity extends AppCompatActivity {
 
         baseToolbar.setNavigationIcon(R.drawable.icon);
         baseToolbar.setTitle(getResources().getString(R.string.app_name));
-        baseToolbar.setTitleTextColor(getResources().getColor(R.color.orange));
+        baseToolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         setSupportActionBar(this.baseToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,7 +68,7 @@ public class BaseActivity extends AppCompatActivity {
         this.baseViewPager.setAdapter(adapter);
 
         final Drawable backImage = getResources().getDrawable(R.drawable.ic_back);
-        backImage.setColorFilter(getResources().getColor(R.color.orange),
+        backImage.setColorFilter(getResources().getColor(R.color.white),
                 PorterDuff.Mode.SRC_ATOP);
 
         this.baseTabLayout.setupWithViewPager(this.baseViewPager);
@@ -112,7 +114,6 @@ public class BaseActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override

@@ -9,9 +9,9 @@
     <color name="darkGold">#BB8000</color>
     <color name="gold">#FDB80F</color>
     <color name="lightOrange">#FE8C01</color>
-    <color name="orange">#ED5C31</color>
+    <color name="green">#0F432C</color>
     <color name="orangeWithTransparency">#80ED5C31</color>
     <color name="ice">#E9EBEE</color>
     <color name="salmon">#FA6565</color>
-    <color name="green">#00AB4C</color>
+    <color name="lightGreen">#00AB4C</color>
 </resources>

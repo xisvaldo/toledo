@@ -1,6 +1,7 @@
 package br.com.ite.adapters;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -76,6 +77,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         Drawable icon = ContextCompat.getDrawable(context, icons[position]);
         icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+        icon.setColorFilter(context.getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         SpannableString sb = new SpannableString(" ");
         ImageSpan is = new ImageSpan(icon, ImageSpan.ALIGN_BOTTOM);
         sb.setSpan(is, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

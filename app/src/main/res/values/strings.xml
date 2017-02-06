@@ -8,7 +8,7 @@
     <string name="solicitations">Solicitações</string>
     <string name="about">Sobre</string>
 
-    <string name="loginStudentId">ID do aluno</string>
+    <string name="loginStudentId">Número da matrícula</string>
     <string name="loginPasswordHint">Senha</string>
     <string name="loginEnter">ENTRAR</string>
     <string name="loginStudentIdObligatory">ID do aluno é obrigatório!</string>
@@ -26,5 +26,7 @@
     <string name="solicitations_comments">Comentários</string>
     <string name="solicitations_send">ENVIAR</string>
     <string name="generalExit">Desejar sair do aplicativo?</string>
+    <string name="loginEmptyStudentError">Ocorreu um erro ao retornar a validação do login. Tente novamente mais tarde!</string>
+    <string name="loginAuthenticationFailed">Matrícula e/ou senha inválidas!</string>
 
 </resources>

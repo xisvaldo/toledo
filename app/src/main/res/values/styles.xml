@@ -14,7 +14,7 @@
         <item name="android:windowActionBar">false</item>
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/blackWithTransparency</item>
-        <item name="colorAccent">@color/orange</item>
+        <item name="colorAccent">@color/green</item>
     </style>
 
     <style name="IconTabLayout" parent="Widget.Design.TabLayout">
@@ -42,6 +42,22 @@
         <item name="android:scrollbarSize">@dimen/scrollbar_size</item>
         <item name="android:scrollbarFadeDuration">@integer/scrollbar_fadeDuration</item>
         <item name="android:scrollbarDefaultDelayBeforeFade">@integer/scrollbar_defaultDelayBeforeFade</item>
+    </style>
+
+    <style name="LoginEditText" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/login_edit_text</item>
+        <item name="android:textColorHint">@color/lightGray</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingLeft">22dp</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <style name="PasswordEditText" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/password_edit_text</item>
+        <item name="android:textColorHint">@color/lightGray</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingLeft">22dp</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
 </resources>

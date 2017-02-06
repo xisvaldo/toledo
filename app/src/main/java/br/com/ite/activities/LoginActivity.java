@@ -20,10 +20,9 @@ import android.widget.ImageView;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.List;
 
 import br.com.ite.R;
-import br.com.ite.interfaces.LoginAPIService;
+import br.com.ite.interfaces.LoginAPI;
 import br.com.ite.models.Student;
 import br.com.ite.utils.GlobalNames;
 import br.com.ite.utils.SnackAlert;
@@ -112,32 +111,31 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show(this, getString(R.string.app_name),
                     getString(R.string.loginValidatingData));
 
-            authentication();
+            authentication(v);
         }
     }
 
-    private void authentication() throws IOException {
+    private void authentication(final View v) throws IOException {
 
         if (!NetworkUtils.checkInternetConnection(this)) return;
 
-        LoginAPIService loginApiService = ServiceGenerator.createService(LoginAPIService.class);
+        LoginAPI loginApi = ServiceGenerator.createService(LoginAPI.class);
 
-        /*Call<Student> call = loginApiService.postLogin(login.getText().toString(),
-                password.getText().toString());*/
+        Call<Student> call = loginApi.postLogin(GlobalNames.ITE_CONTENT_TYPE_URLENCODED,
+                login.getText().toString(),
+                password.getText().toString());
 
-        Call<List<Student>> call = loginApiService.postLogin("010117001","010117001");
-
-        call.enqueue(new Callback<List<Student>>() {
+        call.enqueue(new Callback<Student>() {
             @Override
-            public void onResponse(Call<List<Student>> call, Response<List<Student>> response) {
+            public void onResponse(Call<Student> call, Response<Student> response) {
                 dialog.dismiss();
 
-                if (response.isSuccessful()) {
+                if (response.code() == 200 && response.body() != null) {
                     SharedPreferences preferences =
                             getSharedPreferences(GlobalNames.ITE_PREFERENCES, Context.MODE_PRIVATE);
 
                     preferences.edit().putString(GlobalNames.ITE_PREFERENCES_LOGGED_USER,
-                            new Gson().toJson(response.body().get(0)))
+                            new Gson().toJson(response.body()))
                             .commit();
 
                     preferences.edit().putString(GlobalNames.ITE_PREFERENCES_USER_ID,
@@ -152,12 +150,15 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(baseActivity);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
+                else {
+                   SnackAlert.errorMessage(v, getString(R.string.loginEmptyStudentError));
+                }
             }
 
             @Override
-            public void onFailure(Call<List<Student>> call, Throwable t) {
+            public void onFailure(Call<Student> call, Throwable t) {
                 dialog.dismiss();
-                System.out.println("FAILED");
+                SnackAlert.errorMessage(v, getString(R.string.loginAuthenticationFailed));
             }
         });
     }

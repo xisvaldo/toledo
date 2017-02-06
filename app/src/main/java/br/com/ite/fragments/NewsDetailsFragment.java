@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import br.com.ite.R;
 import br.com.ite.models.News;
 import br.com.ite.utils.GlobalNames;
@@ -45,16 +43,11 @@ public class NewsDetailsFragment extends Fragment {
 
         if (news != null) {
             title.setText(news.getTitle());
-            createdOn.setText(news.getFormattedCreatedOn(getContext()));
+            createdOn.setText(news.getCreationDate());
             description.setText(news.getDescription());
-
-            Picasso.with(getContext())
-                    .load(news.getImageURL())
-                    .placeholder(R.drawable.image_placeholder)
-                    .into(image);
+            image.setImageBitmap(news.getImage());
         }
 
         return fragment;
-
     }
 }

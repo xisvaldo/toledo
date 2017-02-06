@@ -12,8 +12,13 @@ public class GlobalNames {
     public static final String ITE_PREFERENCES_USER_PASSWORD = "USER_PASSWORD";
 
     /** API **/
-    public static final String ITE_API_BASE_URL = "https://www.ite.edu.br/app_ite/";
+    public static final String ITE_API_BASE_URL = "http://187.32.242.130:9095/_app/";
 
     /** ARGS **/
     public static final String ITE_ARGS_SELECTED_NEWS = "SELECTED_NEWS";
+    public static final String ITE_ARGS_SELECTED_GRADES_MONTHS = "GRADES_MONTHS";
+
+    /** Content-Type **/
+    public static final String ITE_CONTENT_TYPE_URLENCODED = "application/x-www-form-urlencoded";
+    public static final String ITE_CONTENT_TYPE_APPLICATION_JSON = "application/json";
 }

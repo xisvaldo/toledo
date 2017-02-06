@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import br.com.ite.R;
 import br.com.ite.interfaces.OnItemClickTransition;
@@ -27,11 +27,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     private Context context;
     private OnItemClickTransition onClick;
-    private ArrayList<News> news;
+    private List<News> news;
 
-    public NewsAdapter(Fragment fragment) {
+    public NewsAdapter(Fragment fragment, List<News> news) {
         this.context = fragment.getContext();
         this.onClick = (OnItemClickTransition) fragment;
+        this.news = news;
     }
 
     public class NewsViewHolder extends RecyclerView.ViewHolder {
@@ -64,7 +65,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         Picasso.with(context).cancelRequest(viewHolder.newsImage);
 
         viewHolder.newsTitle.setText(news.get(position).getTitle());
-        viewHolder.newsCreationDate.setText(news.get(position).getFormattedCreatedOn(context));
+        viewHolder.newsCreationDate.setText(news.get(position).getCreationDate());
         viewHolder.newsDescription.setText(news.get(position).getDescription());
 
         if (news.get(position).getImageURL() != null

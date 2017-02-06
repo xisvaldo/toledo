@@ -1,5 +1,6 @@
 package br.com.ite.fragments;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,9 +20,10 @@ import java.util.List;
 
 import br.com.ite.R;
 import br.com.ite.adapters.NewsAdapter;
-import br.com.ite.interfaces.NewsAPIService;
+import br.com.ite.interfaces.NewsAPI;
 import br.com.ite.interfaces.OnItemClickTransition;
 import br.com.ite.models.News;
+import br.com.ite.utils.GlobalNames;
 import br.com.ite.utils.network.ServiceGenerator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,23 +48,30 @@ public class NewsFragment extends Fragment implements OnItemClickTransition {
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         final ProgressBar progressBar = (ProgressBar) fragment.findViewById(R.id.news_loading);
+        progressBar.setVisibility(View.VISIBLE);
 
         empty = (TextView) fragment.findViewById(R.id.empty);
+        empty.setVisibility(View.VISIBLE);
 
         newsList = (RecyclerView) fragment.findViewById(R.id.news_list);
         newsList.setLayoutManager(layoutManager);
 
-        NewsAPIService newsAPIService = ServiceGenerator.createService(NewsAPIService.class);
-        Call<List<News>> call = newsAPIService.getNews();
+        NewsAPI newsAPI = ServiceGenerator.createService(NewsAPI.class);
+        Call<List<News>> call = newsAPI.getNews(GlobalNames.ITE_CONTENT_TYPE_APPLICATION_JSON);
         call.enqueue(new Callback<List<News>>() {
             @Override
             public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+                progressBar.setVisibility(View.GONE);
+                empty.setVisibility(View.GONE);
 
+                NewsAdapter adapter = new NewsAdapter(NewsFragment.this, response.body());
+                newsList.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<List<News>> call, Throwable t) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
 
@@ -81,6 +90,10 @@ public class NewsFragment extends Fragment implements OnItemClickTransition {
 
             NewsAdapter.NewsViewHolder newsViewHolder = (NewsAdapter.NewsViewHolder) viewHolder;
             NewsDetailsFragment detailsFragment = new NewsDetailsFragment();
+
+            News news = (News) args.get(GlobalNames.ITE_ARGS_SELECTED_NEWS);
+            news.setImage(((BitmapDrawable)newsViewHolder.newsImage.getDrawable()).getBitmap());
+            args.putSerializable(GlobalNames.ITE_ARGS_SELECTED_NEWS, news);
             detailsFragment.setArguments(args);
 
             detailsFragment.setSharedElementEnterTransition(transitionSet);

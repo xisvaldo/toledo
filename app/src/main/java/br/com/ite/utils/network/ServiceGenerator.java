@@ -26,7 +26,10 @@ public class ServiceGenerator {
 
         httpClient.addInterceptor(loggingInterceptor);
 
-        Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy'T'HH:mm:ss").create();
+        Gson gson = new GsonBuilder()
+                .setDateFormat("dd/MM/yyyy'T'HH:mm:ss")
+                .disableHtmlEscaping()
+                .create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(GlobalNames.ITE_API_BASE_URL)

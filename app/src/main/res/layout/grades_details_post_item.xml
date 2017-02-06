@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:background="@color/white"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/grades_details_post_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:text="Português adhauhfudhfhdaufh aufduhfua hdfhau hfdaufh aduf hdaufhaduf hafu dahfuah "
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end"
+        />
+
+    <TextView
+        android:id="@+id/grades_details_post_presence_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grades_details_post_subject"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:text="Faltas"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+
+    <TextView
+        android:id="@+id/grades_details_post_presence_percentage_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grades_details_post_subject"
+        android:layout_toRightOf="@id/grades_details_post_presence_percentage"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/darkGray"
+        android:textSize="20sp"
+        android:text="79.17%"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+
+    <TextView
+        android:id="@+id/grades_details_post_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/grades_details_post_subject"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/darkGray"
+        android:textSize="20sp"
+        android:text="8.30"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+
+    <TextView
+        android:id="@+id/grades_details_post_value_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/grades_details_post_subject"
+        android:layout_toLeftOf="@id/grades_details_post_value"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:text="C. Final:"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+
+</RelativeLayout>

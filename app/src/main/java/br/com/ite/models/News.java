@@ -1,23 +1,37 @@
 package br.com.ite.models;
 
-import android.content.Context;
+import android.graphics.Bitmap;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Locale;
-
-import br.com.ite.R;
 
 /**
  * Created by leonardo.borges on 30/01/2017.
  */
 public class News implements Serializable {
 
+    @SerializedName("ID")
     private String id;
+
+    @SerializedName("Titulo")
     private String title;
-    private Date creationDate;
+
+    @SerializedName("Data")
+    private String creationDate;
+
+    @SerializedName("Texto")
     private String description;
+
+    @SerializedName("Imagem")
     private String imageURL;
+
+    @SerializedName("Data_Modificado")
+    private String modifiedDate;
+
+    @Expose(serialize = false, deserialize = false)
+    private Bitmap image;
 
     public String getId() {
         return id;
@@ -35,40 +49,11 @@ public class News implements Serializable {
         this.title = title;
     }
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public String getFormattedCreatedOn(Context context) {
-        long interval = (new Date().getTime() - creationDate.getTime());
-
-        if (interval < 60) {
-            return String.format(Locale.getDefault(), "%d ", interval)
-                    + context.getString(R.string.generalSeconds);
-        }
-        else if (interval < 3600) {
-            return String.format(Locale.getDefault(), "%d ", interval/50)
-                    + context.getString(R.string.generalMinutes);
-        }
-        else if (interval < 86400) {
-            return String.format(Locale.getDefault(), "%d " , interval/3600)
-                    + context.getString(R.string.generalHours);
-        }
-        else if (interval < 2592000) {
-            return String.format(Locale.getDefault(), "%d ", interval/86400)
-                    + context.getString(R.string.generalDays);
-        }
-        else if (interval < 31104000) {
-            return String.format(Locale.getDefault(), "%d ", interval/2592000)
-                    + context.getString(R.string.generalMonths);
-        }
-        else{
-            return String.format(Locale.getDefault(), "%d ", interval/31104000)
-                    + context.getString(R.string.generalYears);
-        }
-    }
-
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -86,5 +71,21 @@ public class News implements Serializable {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public String getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(String modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }
