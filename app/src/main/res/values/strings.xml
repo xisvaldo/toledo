@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">ITE</string>
     <string name="connectionError">Não foi possível se conectar. Verifique sua conexão com a internet!</string>
-    <string name="exitApp">Deseja sair do aplicativo?</string>
+    <string name="generalEmpty">Sem informações para exibir</string>
+    <string name="generalExit">Desejar sair do aplicativo?</string>
 
     <string name="events">Eventos</string>
-    <string name="grades">Boletim</string>
+    <string name="grades">Notas</string>
     <string name="solicitations">Solicitações</string>
     <string name="about">Sobre</string>
 
@@ -14,8 +15,8 @@
     <string name="loginStudentIdObligatory">ID do aluno é obrigatório!</string>
     <string name="loginPasswordObligatory">Senha do aluno é obrigatória!</string>
     <string name="loginValidatingData">Verificando informações...</string>
-    <string name="generalEmpty">Sem informações para exibir</string>
-    <string name="eventJoin">Participar!</string>
+    <string name="loginAuthenticationFailed">Matrícula e/ou senha inválidas!</string>
+    <string name="loginEmptyStudentError">Ocorreu um erro ao retornar a validação do login. Tente novamente mais tarde!</string>
     <string name="generalSeconds">segundos</string>
     <string name="generalMinutes">minutos</string>
     <string name="generalHours">horas</string>
@@ -25,8 +26,13 @@
     <string name="solicitations_title">Tipo</string>
     <string name="solicitations_comments">Comentários</string>
     <string name="solicitations_send">ENVIAR</string>
-    <string name="generalExit">Desejar sair do aplicativo?</string>
-    <string name="loginEmptyStudentError">Ocorreu um erro ao retornar a validação do login. Tente novamente mais tarde!</string>
-    <string name="loginAuthenticationFailed">Matrícula e/ou senha inválidas!</string>
+    <string name="testOne">P1:</string>
+    <string name="testTwo">P2:</string>
+    <string name="testThree">P3:</string>
+    <string name="testFour">P4:</string>
+    <string name="substituteTestOne">Prova Substutiva:</string>
+    <string name="substituteTestTwo">Prova Substutiva 2:</string>
+    <string name="exam">Exame:</string>
+    <string name="noGrades">Não Consta</string>
 
 </resources>

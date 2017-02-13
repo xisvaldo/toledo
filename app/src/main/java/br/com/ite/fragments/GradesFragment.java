@@ -33,8 +33,8 @@ import retrofit2.Response;
  */
 public class GradesFragment extends Fragment implements OnItemClickTransition {
 
-    private RecyclerView gradesMonthList;
-    private String[] months = { "1º BIMESTRE", "2º BIMESTRE", "3º BIMESTRE", "4º BIMESTRE" };
+    private RecyclerView gradesSubjects;
+    private GradesAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,11 @@ public class GradesFragment extends Fragment implements OnItemClickTransition {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View fragment = inflater.inflate(R.layout.grades_fragment, parent, false);
 
-        gradesMonthList = (RecyclerView) fragment.findViewById(R.id.grades_months_list);
-        gradesMonthList.setLayoutManager(new LinearLayoutManager(getContext()));
-        gradesMonthList.setAdapter(new GradesAdapter(this, months));
+        adapter = new GradesAdapter(this);
+
+        gradesSubjects = (RecyclerView) fragment.findViewById(R.id.grades_subject_list);
+        gradesSubjects.setLayoutManager(new LinearLayoutManager(getContext()));
+        gradesSubjects.setAdapter(adapter);
 
         SharedPreferences preferences = getContext()
                 .getSharedPreferences(GlobalNames.ITE_PREFERENCES, Context.MODE_PRIVATE);
@@ -61,7 +63,10 @@ public class GradesFragment extends Fragment implements OnItemClickTransition {
         call.enqueue(new Callback<List<StudentGrades>>() {
             @Override
             public void onResponse(Call<List<StudentGrades>> call, Response<List<StudentGrades>> response) {
-
+                if (response.isSuccessful()) {
+                    adapter.setData(response.body());
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -83,18 +88,18 @@ public class GradesFragment extends Fragment implements OnItemClickTransition {
 
             setExitTransition(new Fade());
 
-            GradesAdapter.ViewHolder gradesMonthViewHolder =
-                    (GradesAdapter.ViewHolder) viewHolder;
+            GradesAdapter.NormalViewHolder normalViewHolder =
+                    (GradesAdapter.NormalViewHolder) viewHolder;
 
-            GradesDetailsFragment detailsFragment = new GradesDetailsFragment();
+            GradesDetailsNormalFragment detailsFragment = new GradesDetailsNormalFragment();
             detailsFragment.setArguments(args);
             detailsFragment.setSharedElementEnterTransition(transitionSet);
             detailsFragment.setEnterTransition(new Fade());
             detailsFragment.setSharedElementReturnTransition(transitionSet);
 
             getFragmentManager().beginTransaction()
-                    .addSharedElement(gradesMonthViewHolder.gradesMonthItemText, "gradesMonthItemText")
-                    .replace(R.id.grades_months_container, detailsFragment)
+                    .addSharedElement(normalViewHolder.subject, "gradesNormalSubject")
+                    .replace(R.id.grades_container, detailsFragment)
                     .addToBackStack(null)
                     .commit();
         }

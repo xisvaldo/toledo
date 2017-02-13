@@ -57,9 +57,8 @@ public class BaseActivity extends AppCompatActivity {
         this.baseTabLayout = (TabLayout) findViewById(R.id.base_tabs);
         this.baseToolbar = (Toolbar) findViewById(R.id.base_toolbar);
 
-        baseToolbar.setNavigationIcon(R.drawable.icon);
+        baseToolbar.setNavigationIcon(R.drawable.small_logo_white);
         baseToolbar.setTitle(getResources().getString(R.string.app_name));
-        baseToolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         setSupportActionBar(this.baseToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -130,6 +129,10 @@ public class BaseActivity extends AppCompatActivity {
         }
     };
 
+    public void changeToolbarTitle(String title) {
+        baseToolbar.setTitle(title);
+    }
+
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
@@ -140,7 +143,7 @@ public class BaseActivity extends AppCompatActivity {
         AndroidDialog dialog = new AndroidDialog();
         try {
             dialog.show(this, AndroidDialog.Type.QUESTION, getString(R.string.app_name),
-                    getString(R.string.exitApp), new Handler() {
+                    getString(R.string.generalExit), new Handler() {
                         @Override
                         public void handleMessage(Message msg) {
                             if (msg != null) {
@@ -154,5 +157,4 @@ public class BaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }

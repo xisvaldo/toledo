@@ -51,7 +51,7 @@ public class NewsFragment extends Fragment implements OnItemClickTransition {
         progressBar.setVisibility(View.VISIBLE);
 
         empty = (TextView) fragment.findViewById(R.id.empty);
-        empty.setVisibility(View.VISIBLE);
+        empty.setVisibility(View.GONE);
 
         newsList = (RecyclerView) fragment.findViewById(R.id.news_list);
         newsList.setLayoutManager(layoutManager);
@@ -72,6 +72,7 @@ public class NewsFragment extends Fragment implements OnItemClickTransition {
             @Override
             public void onFailure(Call<List<News>> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
+                empty.setVisibility(View.VISIBLE);
             }
         });
 

@@ -7,7 +7,7 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/grades_details_post_subject"
+        android:id="@+id/grades_post_item_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -23,10 +23,10 @@
         />
 
     <TextView
-        android:id="@+id/grades_details_post_presence_percentage"
+        android:id="@+id/grades_post_item_presence_percentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/grades_details_post_subject"
+        android:layout_below="@+id/grades_post_item_subject"
         android:textColor="@color/green"
         android:textSize="20sp"
         android:text="Faltas"
@@ -36,11 +36,11 @@
         />
 
     <TextView
-        android:id="@+id/grades_details_post_presence_percentage_value"
+        android:id="@+id/grades_post_item_presence_percentage_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/grades_details_post_subject"
-        android:layout_toRightOf="@id/grades_details_post_presence_percentage"
+        android:layout_below="@+id/grades_post_item_subject"
+        android:layout_toRightOf="@id/grades_post_item_presence_percentage"
         android:layout_marginLeft="5dp"
         android:textColor="@color/darkGray"
         android:textSize="20sp"
@@ -50,12 +50,12 @@
         />
 
     <TextView
-        android:id="@+id/grades_details_post_value"
+        android:id="@+id/grades_post_item_final_concept_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="20dp"
-        android:layout_below="@+id/grades_details_post_subject"
+        android:layout_below="@+id/grades_post_item_subject"
         android:layout_alignParentRight="true"
         android:textColor="@color/darkGray"
         android:textSize="20sp"
@@ -65,12 +65,12 @@
         />
 
     <TextView
-        android:id="@+id/grades_details_post_value_name"
+        android:id="@+id/grades_post_item_final_concept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_below="@+id/grades_details_post_subject"
-        android:layout_toLeftOf="@id/grades_details_post_value"
+        android:layout_below="@+id/grades_post_item_subject"
+        android:layout_toLeftOf="@id/grades_post_item_final_concept_value"
         android:textColor="@color/green"
         android:textSize="20sp"
         android:text="C. Final:"

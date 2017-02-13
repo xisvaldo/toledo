@@ -16,9 +16,13 @@ public class GlobalNames {
 
     /** ARGS **/
     public static final String ITE_ARGS_SELECTED_NEWS = "SELECTED_NEWS";
-    public static final String ITE_ARGS_SELECTED_GRADES_MONTHS = "GRADES_MONTHS";
+    public static final String ITE_ARGS_SELECTED_NORMAL_GRADES = "SELECTED_NORMAL_GRADES";
 
     /** Content-Type **/
     public static final String ITE_CONTENT_TYPE_URLENCODED = "application/x-www-form-urlencoded";
     public static final String ITE_CONTENT_TYPE_APPLICATION_JSON = "application/json";
+
+    /** GENERAL CONSTANTS **/
+    public static final int ITE_STUDENT_GRADES_ITEM_TYPE_NORMAL = 1;
+    public static final int ITE_STUDENT_GRADES_ITEM_TYPE_POST = 2;
 }

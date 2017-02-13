@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/grades_details_normal_test_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            android:text="@string/testOne"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/grades_details_normal_test_one_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/darkGray"
+            android:textSize="20sp"
+            android:text="@string/noGrades"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/lightGray"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/grades_details_normal_test_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            android:text="@string/testTwo"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/grades_details_normal_test_two_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/darkGray"
+            android:textSize="20sp"
+            android:text="@string/noGrades"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/grades_details_normal_test_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            android:text="@string/testThree"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/grades_details_normal_test_three_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/darkGray"
+            android:textSize="20sp"
+            android:text="@string/noGrades"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/lightGray"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/grades_details_normal_test_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            android:text="@string/testFour"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/grades_details_normal_test_four_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/darkGray"
+            android:textSize="20sp"
+            android:text="@string/noGrades"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/grades_details_normal_substitute_test_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            android:text="@string/substituteTestOne"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/grades_details_normal_substitute_test_one_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/darkGray"
+            android:textSize="20sp"
+            android:text="@string/noGrades"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/lightGray"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/grades_details_normal_substitute_test_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            android:text="@string/substituteTestTwo"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/grades_details_normal_substitute_test_two_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/darkGray"
+            android:textSize="20sp"
+            android:text="@string/noGrades"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/grades_details_normal_exam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:text="@string/exam"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/grades_details_normal_exam_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/darkGray"
+            android:textSize="20sp"
+            android:text="@string/noGrades"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

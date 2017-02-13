@@ -52,7 +52,7 @@
             android:layout_height="32dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="25dp"
-            android:src="@drawable/ic_event"
+            android:src="@drawable/ic_events"
             android:tint="@color/lightGreen" />
 
         <TextView

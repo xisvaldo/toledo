@@ -27,10 +27,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private int[] icons = {
             R.drawable.ic_news,
-            R.drawable.ic_event,
+            R.drawable.ic_events,
             R.drawable.ic_grades,
             R.drawable.ic_solicitations,
-            R.drawable.icon
+            R.drawable.ic_about,
+            R.drawable.logo_white
     };
 
     private Context context;

@@ -1,11 +1,16 @@
 package br.com.ite.models;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+import br.com.ite.utils.GlobalNames;
 
 /**
  * Created by leonardo.borges on 02/02/2017.
  */
-public class StudentGrades {
+public class StudentGrades implements Serializable {
 
     @SerializedName("ALUNO")
     private String studentId;
@@ -46,6 +51,9 @@ public class StudentGrades {
 
     @SerializedName("PERCENTUAL_PRESENCA")
     private String presencePercentage;
+
+    @Expose(serialize = false, deserialize = false)
+    private int itemType;
 
     public String getStudentId() {
         return studentId;
@@ -149,5 +157,15 @@ public class StudentGrades {
 
     public void setPresencePercentage(String presencePercentage) {
         this.presencePercentage = presencePercentage;
+    }
+
+    public int getItemType() {
+        return this.finalConcept == null || this.finalConcept.isEmpty()
+                ? GlobalNames.ITE_STUDENT_GRADES_ITEM_TYPE_NORMAL
+                : GlobalNames.ITE_STUDENT_GRADES_ITEM_TYPE_POST;
+    }
+
+    public void setItemType(int itemType) {
+        this.itemType = itemType;
     }
 }
