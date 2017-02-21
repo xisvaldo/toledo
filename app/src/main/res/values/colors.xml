@@ -3,7 +3,7 @@
     <color name="black">#000000</color>
     <color name="blackWithTransparency">#30000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="lightGray">#CECECE</color>
+    <color name="lightGray">#EDF0F0</color>
     <color name="veryLightGray">#F4F4F4</color>
     <color name="gray">#888888</color>
     <color name="darkGold">#BB8000</color>

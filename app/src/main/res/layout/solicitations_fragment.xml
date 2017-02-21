@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
-    <android.support.v7.widget.AppCompatSpinner
+    <TextView
+        android:id="@+id/solicitations_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="20dp"
+        android:text="@string/solicitations_info"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:textStyle="normal" />
+
+    <Spinner
         android:id="@+id/solicitations_types"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:id="@+id/solicitations_title"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/solicitations_title"
-        />
-
-    <EditText
-        android:id="@+id/solicitations_comments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/solicitations_comments"
+        android:layout_below="@id/solicitations_info"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:popupBackground="@color/white"
+        android:background="@drawable/custom_spinner"
         />
 
     <Button
         android:id="@+id/solicitations_send"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true"
         android:text="@string/solicitations_send"
+        android:background="@drawable/rounded_button_green"
         />
 
-</LinearLayout>
+</RelativeLayout>

@@ -17,6 +17,8 @@ import java.io.IOException;
 
 import br.com.ite.R;
 import br.com.ite.adapters.ViewPagerAdapter;
+import br.com.ite.fragments.GradesDetailsNormalFragment;
+import br.com.ite.fragments.GradesFragment;
 import br.com.ite.utils.PicassoUtils;
 import br.com.xisvaldo.android.dialog.AndroidDialog;
 
@@ -29,8 +31,8 @@ public class BaseActivity extends AppCompatActivity {
         NEWS,
         EVENTS,
         GRADES,
-        SOLICITATIONS,
-        ABOUT;
+        SOLICITATIONS;/*,
+        ABOUT;*/
 
         public static VIEW_PAGER_OPTIONS getMenuOptionFromInt(int option) {
             return VIEW_PAGER_OPTIONS.values()[option];
@@ -57,8 +59,8 @@ public class BaseActivity extends AppCompatActivity {
         this.baseTabLayout = (TabLayout) findViewById(R.id.base_tabs);
         this.baseToolbar = (Toolbar) findViewById(R.id.base_toolbar);
 
-        baseToolbar.setNavigationIcon(R.drawable.small_logo_white);
-        baseToolbar.setTitle(getResources().getString(R.string.app_name));
+        baseToolbar.setNavigationIcon(R.drawable.logo_white);
+        baseToolbar.setTitle(getResources().getString(R.string.news));
 
         setSupportActionBar(this.baseToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,8 +81,8 @@ public class BaseActivity extends AppCompatActivity {
                 switch (VIEW_PAGER_OPTIONS.getMenuOptionFromInt(tab.getPosition())) {
 
                     case NEWS:
-                        baseToolbar.setTitle(getResources().getString(R.string.app_name));
-                        baseToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.icon));
+                        baseToolbar.setTitle(getResources().getString(R.string.news));
+                        baseToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.logo_white));
                         baseToolbar.setNavigationOnClickListener(null);
                         break;
 
@@ -102,11 +104,11 @@ public class BaseActivity extends AppCompatActivity {
                         baseToolbar.setNavigationOnClickListener(backToTimelineClick);
                         break;
 
-                    case ABOUT:
+                    /*case ABOUT:
                         baseToolbar.setTitle(getResources().getString(R.string.about));
                         baseToolbar.setNavigationIcon(backImage);
                         baseToolbar.setNavigationOnClickListener(backToTimelineClick);
-                        break;
+                        break;*/
                 }
                 baseViewPager.setCurrentItem(tab.getPosition(), true);
             }
@@ -136,6 +138,13 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+
+            if (getSupportFragmentManager().findFragmentByTag(
+                    "android:switcher:" + R.id.base_viewpager + ":" + baseViewPager.getCurrentItem())
+                    instanceof GradesFragment) {
+                baseToolbar.setTitle(getResources().getString(R.string.grades));
+            }
+
             getSupportFragmentManager().popBackStack();
             return;
         }

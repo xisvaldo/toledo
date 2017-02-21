@@ -63,5 +63,4 @@ public class GradesDetailsNormalFragment extends Fragment {
 
         return fragment;
     }
-
 }

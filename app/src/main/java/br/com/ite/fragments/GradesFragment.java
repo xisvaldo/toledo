@@ -14,10 +14,13 @@ import android.transition.TransitionSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
 import br.com.ite.R;
+import br.com.ite.activities.BaseActivity;
 import br.com.ite.adapters.GradesAdapter;
 import br.com.ite.interfaces.GradesAPI;
 import br.com.ite.interfaces.OnItemClickTransition;
@@ -51,6 +54,12 @@ public class GradesFragment extends Fragment implements OnItemClickTransition {
         gradesSubjects.setLayoutManager(new LinearLayoutManager(getContext()));
         gradesSubjects.setAdapter(adapter);
 
+        final ProgressBar loading = (ProgressBar) fragment.findViewById(R.id.grades_loading);
+        loading.setVisibility(View.VISIBLE);
+
+        final TextView empty = (TextView) fragment.findViewById(R.id.empty);
+        empty.setVisibility(View.GONE);
+
         SharedPreferences preferences = getContext()
                 .getSharedPreferences(GlobalNames.ITE_PREFERENCES, Context.MODE_PRIVATE);
 
@@ -66,12 +75,15 @@ public class GradesFragment extends Fragment implements OnItemClickTransition {
                 if (response.isSuccessful()) {
                     adapter.setData(response.body());
                     adapter.notifyDataSetChanged();
+                    loading.setVisibility(View.GONE);
+                    empty.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<List<StudentGrades>> call, Throwable t) {
-
+                loading.setVisibility(View.GONE);
+                empty.setVisibility(View.VISIBLE);
             }
         });
 

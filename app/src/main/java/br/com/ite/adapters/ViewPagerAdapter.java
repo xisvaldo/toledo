@@ -14,7 +14,6 @@ import android.util.Log;
 
 import br.com.ite.R;
 import br.com.ite.activities.BaseActivity;
-import br.com.ite.fragments.AboutFragment;
 import br.com.ite.fragments.EventsFragment;
 import br.com.ite.fragments.GradesFragment;
 import br.com.ite.fragments.NewsFragment;
@@ -29,9 +28,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             R.drawable.ic_news,
             R.drawable.ic_events,
             R.drawable.ic_grades,
-            R.drawable.ic_solicitations,
+            R.drawable.ic_solicitations/*,
             R.drawable.ic_about,
-            R.drawable.logo_white
+            R.drawable.logo_white*/
     };
 
     private Context context;
@@ -57,9 +56,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             } else if (position == BaseActivity.VIEW_PAGER_OPTIONS.SOLICITATIONS.ordinal()) {
                 return new SolicitationsFragment();
 
-            } else if (position == BaseActivity.VIEW_PAGER_OPTIONS.ABOUT.ordinal()) {
+            }/* else if (position == BaseActivity.VIEW_PAGER_OPTIONS.ABOUT.ordinal()) {
                 return new AboutFragment();
-            }
+            }*/
         }
         catch (Exception ex) {
             Log.e("ViewPagerAdapter", "getItem()");

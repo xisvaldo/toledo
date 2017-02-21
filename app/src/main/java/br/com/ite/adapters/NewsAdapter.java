@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         viewHolder.newsTitle.setText(news.get(position).getTitle());
         viewHolder.newsCreationDate.setText(news.get(position).getCreationDate());
         viewHolder.newsDescription.setText(news.get(position).getDescription());
+
 
         if (news.get(position).getImageURL() != null
                 && !news.get(position).getImageURL().isEmpty()) {

@@ -4,6 +4,7 @@
     <string name="generalEmpty">Sem informações para exibir</string>
     <string name="generalExit">Desejar sair do aplicativo?</string>
 
+    <string name="news">Instituto Toledo de Ensino</string>
     <string name="events">Eventos</string>
     <string name="grades">Notas</string>
     <string name="solicitations">Solicitações</string>
@@ -34,5 +35,11 @@
     <string name="substituteTestTwo">Prova Substutiva 2:</string>
     <string name="exam">Exame:</string>
     <string name="noGrades">Não Consta</string>
+    <string name="eventStartDate">Começa em </string>
+    <string name="eventEndDate">Termina em</string>
+    <string name="solicitationSendSuccess">Solicitação enviada!</string>
+    <string name="solicitationSendFailed">Ocorreu um erro ao enviar a solicitação!\nVerifique sua conexão ou tente novamente mais tarde.</string>
+    <string name="solicitations_info">Qual tipo de serviço você precisa?</string>
+    <string name="solicitation_confirmation">Esse serviço custará %s.\nConfirma a solicitação?</string>
 
 </resources>
