@@ -1,57 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/event_container"
+    android:id="@+id/notification_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     >
 
     <TextView
-        android:id="@+id/event_description"
+        android:id="@+id/notification_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="15dp"
-        android:text="Title"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textColor="@color/green"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/event_start_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/event_description"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:layout_marginStart="15dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/eventStartDate"
-        android:textColor="@color/gray"
-        android:textSize="16sp" />
+        android:textColor="@color/green"
+        android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/event_end_date"
+        android:id="@+id/notification_end_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/event_start_date"
+        android:layout_toRightOf="@id/notification_start_date"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="5dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/eventEndDate"
-        android:textColor="@color/gray"
-        android:textSize="16sp" />
+        android:textColor="@color/green"
+        android:textSize="18sp" />
 
-    <View
-        android:id="@+id/event_status"
-        android:layout_width="10dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:background="@color/gold"
-        />
+    <TextView
+        android:id="@+id/notification_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/notification_start_date"
+        android:text="Title"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@color/gray"
+        android:textSize="18sp" />
 
 </RelativeLayout>

@@ -5,38 +5,47 @@
     android:id="@+id/grades_container"
     >
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/grades_subject_list"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
         android:background="@color/white"
-        android:divider="@android:color/transparent"
-        android:scrollbars="vertical"
-        android:scrollbarStyle="outsideOverlay"
-        android:fadeScrollbars="true"
-        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
-        android:scrollbarSize="@dimen/scrollbar_size"
-        android:scrollbarFadeDuration="@integer/scrollbar_fadeDuration"
-        android:scrollbarDefaultDelayBeforeFade="@integer/scrollbar_defaultDelayBeforeFade"
-        />
+        android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/grades_loading"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:indeterminateBehavior="cycle"
-        android:indeterminateTint="@color/green"
-        android:visibility="gone" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/grades_subject_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:background="@color/white"
+            android:divider="@android:color/transparent"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="outsideOverlay"
+            android:fadeScrollbars="true"
+            android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+            android:scrollbarSize="@dimen/scrollbar_size"
+            android:scrollbarFadeDuration="@integer/scrollbar_fadeDuration"
+            android:scrollbarDefaultDelayBeforeFade="@integer/scrollbar_defaultDelayBeforeFade"
+            />
 
-    <TextView
-        android:id="@+id/empty"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:text="@string/generalEmpty"
-        android:textColor="@color/darkGray"
-        android:textSize="22sp"
-        android:visibility="gone" />
+        <ProgressBar
+            android:id="@+id/grades_loading"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerInParent="true"
+            android:indeterminateBehavior="cycle"
+            android:indeterminateTint="@color/green"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="@string/generalEmpty"
+            android:textColor="@color/darkGray"
+            android:textSize="22sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 </FrameLayout>

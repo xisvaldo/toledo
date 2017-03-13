@@ -12,9 +12,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by alexandre.paravani on 2016-08-17.
- */
 public class PicassoUtils {
 
     private static boolean singleton = false;

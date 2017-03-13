@@ -11,14 +11,17 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.IOException;
 
 import br.com.ite.R;
 import br.com.ite.adapters.ViewPagerAdapter;
-import br.com.ite.fragments.GradesDetailsNormalFragment;
 import br.com.ite.fragments.GradesFragment;
+import br.com.ite.fragments.NotificationsFragment;
 import br.com.ite.utils.PicassoUtils;
 import br.com.xisvaldo.android.dialog.AndroidDialog;
 
@@ -61,6 +64,7 @@ public class BaseActivity extends AppCompatActivity {
 
         baseToolbar.setNavigationIcon(R.drawable.logo_white);
         baseToolbar.setTitle(getResources().getString(R.string.news));
+
 
         setSupportActionBar(this.baseToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -165,5 +169,28 @@ public class BaseActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_notification, menu);
+        Drawable drawable = menu.findItem(R.id.menu_notification_item).getIcon();
+
+        drawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.white));
+        menu.findItem(R.id.menu_notification_item).setIcon(drawable);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_notification_item) {
+            NotificationsFragment fragment = new NotificationsFragment();
+            fragment.show(getFragmentManager(), "DIALOG");
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

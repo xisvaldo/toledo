@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/notifications_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:clipToPadding="false"
+        android:fadeScrollbars="true"
+        android:scrollbarDefaultDelayBeforeFade="@integer/scrollbar_defaultDelayBeforeFade"
+        android:scrollbarFadeDuration="@integer/scrollbar_fadeDuration"
+        android:scrollbarSize="@dimen/scrollbar_size"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+        android:scrollbars="vertical"
+        />
+
+    <ProgressBar
+        android:id="@+id/notifications_loading"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerInParent="true"
+        android:indeterminateBehavior="cycle"
+        android:indeterminateTint="@color/green"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="@string/generalEmpty"
+        android:textColor="@color/darkGray"
+        android:textSize="22sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -22,16 +22,9 @@ public class SplashActivity extends AppCompatActivity implements OnSplashCallbac
     }
 
     @Override
-    public void onSplashComplete(SplashTask.Result result) {
+    public void onSplashComplete() {
 
-        Intent activity;
-
-        if (result == SplashTask.Result.NOT_LOGGED_IN) {
-            activity = new Intent(SplashActivity.this, LoginActivity.class);
-        }
-        else {
-            activity = new Intent(SplashActivity.this, BaseActivity.class);
-        }
+        Intent activity = new Intent(SplashActivity.this, BaseActivity.class);
 
         activity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
                 | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS

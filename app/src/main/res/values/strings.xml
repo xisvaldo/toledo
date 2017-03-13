@@ -41,5 +41,6 @@
     <string name="solicitationSendFailed">Ocorreu um erro ao enviar a solicitação!\nVerifique sua conexão ou tente novamente mais tarde.</string>
     <string name="solicitations_info">Qual tipo de serviço você precisa?</string>
     <string name="solicitation_confirmation">Esse serviço custará %s.\nConfirma a solicitação?</string>
+    <string name="menu_notification">Notificações</string>
 
 </resources>
