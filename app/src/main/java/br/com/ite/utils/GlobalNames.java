@@ -7,16 +7,18 @@ public class GlobalNames {
 
     /** PREFERENCES **/
     public static final String ITE_PREFERENCES = "ITE_PREFERENCES";
-    public static final String ITE_PREFERENCES_LOGGED_USER = "LOGGED_USER";
     public static final String ITE_PREFERENCES_USER_ID = "USER_ID";
     public static final String ITE_PREFERENCES_USER_PASSWORD = "USER_PASSWORD";
+    public static final String ITE_PREFERENCES_IS_LOGGED = "IS_LOGGED";
 
     /** API **/
-    public static final String ITE_API_BASE_URL = "http://187.32.242.130:9095/_app/";
+    public static final String ITE_API_BASE_URL = "https://www.ite.edu.br/app/_app/";
+    //http://187.32.242.130:9095/_app/
 
     /** ARGS **/
     public static final String ITE_ARGS_SELECTED_NEWS = "SELECTED_NEWS";
     public static final String ITE_ARGS_SELECTED_NORMAL_GRADES = "SELECTED_NORMAL_GRADES";
+    public static final String ITE_LOGIN_CALLBACK = "LOGIN_CALLBACK";
 
     /** Content-Type **/
     public static final String ITE_CONTENT_TYPE_URLENCODED = "application/x-www-form-urlencoded";

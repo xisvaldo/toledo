@@ -14,10 +14,13 @@ import android.util.Log;
 
 import br.com.ite.R;
 import br.com.ite.activities.BaseActivity;
+import br.com.ite.fragments.ContainerGradesFragment;
+import br.com.ite.fragments.ContainerSolicitationsFragment;
 import br.com.ite.fragments.EventsFragment;
 import br.com.ite.fragments.GradesFragment;
 import br.com.ite.fragments.NewsFragment;
 import br.com.ite.fragments.SolicitationsFragment;
+import br.com.ite.utils.UserStorage;
 
 /**
  * Created by leonardo.borges on 09/08/2016.
@@ -28,9 +31,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             R.drawable.ic_news,
             R.drawable.ic_events,
             R.drawable.ic_grades,
-            R.drawable.ic_solicitations/*,
-            R.drawable.ic_about,
-            R.drawable.logo_white*/
+            R.drawable.ic_solicitations
     };
 
     private Context context;
@@ -51,16 +52,23 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return new EventsFragment();
 
             } else if (position == BaseActivity.VIEW_PAGER_OPTIONS.GRADES.ordinal()) {
-                return new GradesFragment();
+                if (!UserStorage.isLogged(context)) {
+                    return new ContainerGradesFragment();
+                }
+                else {
+                    return new GradesFragment();
+                }
+            }
+            else if (position == BaseActivity.VIEW_PAGER_OPTIONS.SOLICITATIONS.ordinal()) {
+                if (!UserStorage.isLogged(context)) {
+                    return new ContainerSolicitationsFragment();
+                }
+                else {
+                    return new SolicitationsFragment();
+                }
+            }
 
-            } else if (position == BaseActivity.VIEW_PAGER_OPTIONS.SOLICITATIONS.ordinal()) {
-                return new SolicitationsFragment();
-
-            }/* else if (position == BaseActivity.VIEW_PAGER_OPTIONS.ABOUT.ordinal()) {
-                return new AboutFragment();
-            }*/
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Log.e("ViewPagerAdapter", "getItem()");
             ex.printStackTrace();
         }

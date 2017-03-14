@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -34,8 +33,7 @@ public class BaseActivity extends AppCompatActivity {
         NEWS,
         EVENTS,
         GRADES,
-        SOLICITATIONS;/*,
-        ABOUT;*/
+        SOLICITATIONS;
 
         public static VIEW_PAGER_OPTIONS getMenuOptionFromInt(int option) {
             return VIEW_PAGER_OPTIONS.values()[option];
@@ -108,11 +106,6 @@ public class BaseActivity extends AppCompatActivity {
                         baseToolbar.setNavigationOnClickListener(backToTimelineClick);
                         break;
 
-                    /*case ABOUT:
-                        baseToolbar.setTitle(getResources().getString(R.string.about));
-                        baseToolbar.setNavigationIcon(backImage);
-                        baseToolbar.setNavigationOnClickListener(backToTimelineClick);
-                        break;*/
                 }
                 baseViewPager.setCurrentItem(tab.getPosition(), true);
             }
@@ -141,6 +134,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
 
             if (getSupportFragmentManager().findFragmentByTag(
@@ -148,6 +142,11 @@ public class BaseActivity extends AppCompatActivity {
                     instanceof GradesFragment) {
                 baseToolbar.setTitle(getResources().getString(R.string.grades));
             }
+           /* else if (getSupportFragmentManager().findFragmentByTag("LOGIN_FRAGMENT") != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .remove(getSupportFragmentManager().findFragmentByTag("LOGIN_FRAGMENT"))
+                        .commit();
+            }*/
 
             getSupportFragmentManager().popBackStack();
             return;
@@ -184,12 +183,8 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.menu_notification_item) {
-            NotificationsFragment fragment = new NotificationsFragment();
-            fragment.show(getFragmentManager(), "DIALOG");
-        }
+        NotificationsFragment fragment = new NotificationsFragment();
+        fragment.show(getSupportFragmentManager(), "DIALOG");
 
         return super.onOptionsItemSelected(item);
     }

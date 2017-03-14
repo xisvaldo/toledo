@@ -1,35 +1,32 @@
-package br.com.ite.activities;
+package br.com.ite.fragments;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
 
 import br.com.ite.R;
 import br.com.ite.interfaces.LoginAPI;
+import br.com.ite.interfaces.OnLoginCallback;
 import br.com.ite.models.Student;
 import br.com.ite.utils.GlobalNames;
 import br.com.ite.utils.SnackAlert;
 import br.com.ite.utils.network.NetworkUtils;
 import br.com.ite.utils.network.ServiceGenerator;
-import br.com.xisvaldo.android.dialog.AndroidDialog;
-import br.com.xisvaldo.android.dialog.AndroidProgressDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,49 +34,33 @@ import retrofit2.Response;
 /**
  * Created by leonardo.borges on 26/01/2017.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginFragment extends AppCompatDialogFragment {
 
     private EditText login;
     private EditText password;
     private boolean isShowingPassword = false;
-    private AndroidProgressDialog dialog;
+    private boolean loginSucceed = false;
+    private OnLoginCallback callback;
+
+    public enum LOGIN_RESULT {
+        SUCCESS,
+        FAILED
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
-
-        setupViewsAndEvents();
     }
 
     @Override
-    public void onBackPressed() {
-        try {
-            AndroidDialog.show(this,
-                    AndroidDialog.Type.QUESTION,
-                    getString(R.string.app_name),
-                    getString(R.string.generalExit),
-                    new Handler() {
-                        @Override
-                        public void handleMessage(Message msg) {
-                            if (msg != null) {
-                                if (msg.what == AndroidDialog.Result.YES.ordinal()) {
-                                    finish();
-                                }
-                            }
-                        }
-                    });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        View fragment = inflater.inflate(R.layout.login_fragment, parent, false);
 
-    private void setupViewsAndEvents() {
-        login = (EditText) findViewById(R.id.login_student_id);
+        login = (EditText) fragment.findViewById(R.id.login_student_id);
 
-        setPasswordVisibility();
+        setPasswordVisibility(fragment);
 
-        Button enter = (Button) findViewById(R.id.login_enter);
+        Button enter = (Button) fragment.findViewById(R.id.login_enter);
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,13 +71,19 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Bundle args = getArguments();
+        callback = (OnLoginCallback) args.getSerializable(GlobalNames.ITE_LOGIN_CALLBACK);
+
+        return fragment;
     }
 
     private void validateData(View v) throws IOException {
         // Close keyboard to show SnackBar message (if error occurs)
-        InputMethodManager imm = (InputMethodManager) getApplicationContext()
+        InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getWindow().getDecorView().getRootView().getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView()
+                .getRootView().getWindowToken(), 0);
 
         if (login.getText().toString().trim().isEmpty()) {
             SnackAlert.errorMessage(v, getString(R.string.loginStudentIdObligatory));
@@ -107,17 +94,13 @@ public class LoginActivity extends AppCompatActivity {
             password.requestFocus();
         }
         else {
-            dialog = new AndroidProgressDialog();
-            dialog.show(this, getString(R.string.app_name),
-                    getString(R.string.loginValidatingData));
-
             authentication(v);
         }
     }
 
     private void authentication(final View v) throws IOException {
 
-        if (!NetworkUtils.checkInternetConnection(this)) return;
+        if (!NetworkUtils.checkInternetConnection(getActivity())) return;
 
         LoginAPI loginApi = ServiceGenerator.createService(LoginAPI.class);
 
@@ -128,44 +111,61 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<Student>() {
             @Override
             public void onResponse(Call<Student> call, Response<Student> response) {
-                dialog.dismiss();
 
                 if (response.code() == 200 && response.body() != null) {
-                    SharedPreferences preferences =
-                            getSharedPreferences(GlobalNames.ITE_PREFERENCES, Context.MODE_PRIVATE);
-
-                    preferences.edit().putString(GlobalNames.ITE_PREFERENCES_LOGGED_USER,
-                            new Gson().toJson(response.body()))
-                            .commit();
+                    loginSucceed = true;
+                    SharedPreferences preferences = getActivity()
+                            .getSharedPreferences(GlobalNames.ITE_PREFERENCES, Context.MODE_PRIVATE);
 
                     preferences.edit().putString(GlobalNames.ITE_PREFERENCES_USER_ID,
-                            login.getText().toString())
-                            .commit();
+                            login.getText().toString()).commit();
 
                     preferences.edit().putString(GlobalNames.ITE_PREFERENCES_USER_PASSWORD,
-                            password.getText().toString())
-                            .commit();
+                            password.getText().toString()).commit();
 
-                    Intent baseActivity = new Intent(LoginActivity.this, BaseActivity.class);
-                    startActivity(baseActivity);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    preferences.edit().putBoolean(GlobalNames.ITE_PREFERENCES_IS_LOGGED,
+                            true).commit();
+
+                    if (getDialog() != null) {
+                        dismiss();
+                    }
+                    else {
+                        setCallback();
+                    }
                 }
                 else {
-                   SnackAlert.errorMessage(v, getString(R.string.loginEmptyStudentError));
+                    loginSucceed = false;
+                    SnackAlert.errorMessage(v, getString(R.string.loginEmptyStudentError));
                 }
             }
 
             @Override
             public void onFailure(Call<Student> call, Throwable t) {
-                dialog.dismiss();
+                loginSucceed = false;
+                setCallback();
                 SnackAlert.errorMessage(v, getString(R.string.loginAuthenticationFailed));
             }
         });
     }
 
-    private void setPasswordVisibility() {
-        password = (EditText) findViewById(R.id.login_password);
-        final ImageView passwordVisibility = (ImageView) findViewById(R.id.login_password_visibility);
+    @Override
+    public void onDismiss(final DialogInterface dialog) {
+        setCallback();
+    }
+
+    private void setCallback() {
+        if (loginSucceed) {
+            callback.onLoginComplete(LOGIN_RESULT.SUCCESS);
+        }
+        else {
+            callback.onLoginComplete(LOGIN_RESULT.FAILED);
+        }
+    }
+
+    private void setPasswordVisibility(View fragment) {
+        password = (EditText) fragment.findViewById(R.id.login_password);
+        final ImageView passwordVisibility = (ImageView) fragment
+                .findViewById(R.id.login_password_visibility);
 
         if (password != null && passwordVisibility != null) {
             password.addTextChangedListener(new TextWatcher() {
@@ -208,7 +208,8 @@ public class LoginActivity extends AppCompatActivity {
                             passwordVisibility.setImageResource(R.drawable.ic_visibility_off);
                         }
 
-                        passwordVisibility.setColorFilter(getApplicationContext().getResources()
+                        passwordVisibility.setColorFilter(getActivity()
+                                .getApplicationContext().getResources()
                                 .getColor(R.color.darkGray), PorterDuff.Mode.SRC_ATOP);
 
                         if (cursor != null) {

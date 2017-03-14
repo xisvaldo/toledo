@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -39,10 +40,11 @@ import retrofit2.Response;
 /**
  * Created by leonardo.borges on 26/01/2017.
  */
-public class SolicitationsFragment extends Fragment {
+public class SolicitationsFragment extends Fragment implements Serializable {
 
-    Spinner solicitationSpinner;
-    SolicitationAPI solicitationAPI;
+    private Spinner solicitationSpinner;
+    private SolicitationAPI solicitationAPI;
+    private Button send;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,23 +64,39 @@ public class SolicitationsFragment extends Fragment {
 
         call.enqueue(new Callback<ArrayList<Solicitation>>() {
             @Override
-            public void onResponse(Call<ArrayList<Solicitation>> call, Response<ArrayList<Solicitation>> response) {
+            public void onResponse(Call<ArrayList<Solicitation>> call,
+                                   Response<ArrayList<Solicitation>> response) {
 
                 if (response.isSuccessful()) {
                     SolicitationSpinnerAdapter adapter = new
-                            SolicitationSpinnerAdapter(SolicitationsFragment.this, response.body());
+                            SolicitationSpinnerAdapter(SolicitationsFragment.this,
+                            response.body());
                     solicitationSpinner.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+                }
+                else {
+                    onFailure(call, new Throwable());
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<Solicitation>> call, Throwable t) {
-                //todo
+
+                ArrayList<Solicitation> errorSolicitations = new ArrayList<>();
+
+                Solicitation solicitation = new Solicitation();
+                solicitation.setDescription(getString(R.string.solicitationLoadFailed));
+                errorSolicitations.add(solicitation);
+
+                SolicitationSpinnerAdapter adapter = new
+                        SolicitationSpinnerAdapter(SolicitationsFragment.this,
+                        errorSolicitations);
+                solicitationSpinner.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
         });
 
-        Button send = (Button) fragment.findViewById(R.id.solicitations_send);
+        send = (Button) fragment.findViewById(R.id.solicitations_send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,6 +137,10 @@ public class SolicitationsFragment extends Fragment {
     }
 
     private void sendSolicitation(Solicitation selectedSolicitation) {
+
+        if (selectedSolicitation.getDescription().equals(getString(R.string.solicitationLoadFailed))) {
+            return;
+        }
 
         JSONArray json = new JSONArray();
 

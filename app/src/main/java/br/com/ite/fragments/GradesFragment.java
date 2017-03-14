@@ -20,7 +20,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.ite.R;
-import br.com.ite.activities.BaseActivity;
 import br.com.ite.adapters.GradesAdapter;
 import br.com.ite.interfaces.GradesAPI;
 import br.com.ite.interfaces.OnItemClickTransition;
@@ -36,8 +35,9 @@ import retrofit2.Response;
  */
 public class GradesFragment extends Fragment implements OnItemClickTransition {
 
-    private RecyclerView gradesSubjects;
     private GradesAdapter adapter;
+    private TextView empty;
+    private ProgressBar loading;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,14 +50,14 @@ public class GradesFragment extends Fragment implements OnItemClickTransition {
 
         adapter = new GradesAdapter(this);
 
-        gradesSubjects = (RecyclerView) fragment.findViewById(R.id.grades_subject_list);
+        RecyclerView gradesSubjects = (RecyclerView) fragment.findViewById(R.id.grades_subject_list);
         gradesSubjects.setLayoutManager(new LinearLayoutManager(getContext()));
         gradesSubjects.setAdapter(adapter);
 
-        final ProgressBar loading = (ProgressBar) fragment.findViewById(R.id.grades_loading);
+        loading = (ProgressBar) fragment.findViewById(R.id.grades_loading);
         loading.setVisibility(View.VISIBLE);
 
-        final TextView empty = (TextView) fragment.findViewById(R.id.empty);
+        empty = (TextView) fragment.findViewById(R.id.empty);
         empty.setVisibility(View.GONE);
 
         SharedPreferences preferences = getContext()

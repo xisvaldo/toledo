@@ -1,8 +1,7 @@
 package br.com.ite.adapters;
 
-import android.app.DialogFragment;
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     private List<Notification> notifications;
     private LayoutInflater inflater;
 
-    public NotificationsAdapter(DialogFragment fragment) {
+    public NotificationsAdapter(AppCompatDialogFragment fragment) {
         this.context = fragment.getActivity().getApplicationContext();
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

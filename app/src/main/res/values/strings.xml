@@ -12,7 +12,7 @@
 
     <string name="loginStudentId">Número da matrícula</string>
     <string name="loginPasswordHint">Senha</string>
-    <string name="loginEnter">ENTRAR</string>
+    <string name="loginEnter">AUTENTICAR</string>
     <string name="loginStudentIdObligatory">ID do aluno é obrigatório!</string>
     <string name="loginPasswordObligatory">Senha do aluno é obrigatória!</string>
     <string name="loginValidatingData">Verificando informações...</string>
@@ -42,5 +42,8 @@
     <string name="solicitations_info">Qual tipo de serviço você precisa?</string>
     <string name="solicitation_confirmation">Esse serviço custará %s.\nConfirma a solicitação?</string>
     <string name="menu_notification">Notificações</string>
+    <string name="loginAuthentication">Autenticação</string>
+    <string name="solicitationLoadFailed">Nenhum item</string>
+    <string name="loginRequired">Essa tela requer autenticação</string>
 
 </resources>
