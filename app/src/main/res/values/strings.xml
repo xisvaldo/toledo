@@ -44,6 +44,7 @@
     <string name="menu_notification">Notificações</string>
     <string name="loginAuthentication">Autenticação</string>
     <string name="solicitationLoadFailed">Nenhum item</string>
-    <string name="loginRequired">Essa tela requer autenticação</string>
+    <string name="loginRequired">Para acessar essa tela, é necessário fazer login!</string>
+    <string name="logoutConfirmation">Deseja sair com seus dados?\nAlgumas funcionalidades exigirão login.</string>
 
 </resources>

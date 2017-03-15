@@ -25,10 +25,12 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import br.com.ite.R;
+import br.com.ite.activities.BaseActivity;
 import br.com.ite.adapters.SolicitationSpinnerAdapter;
 import br.com.ite.interfaces.SolicitationAPI;
 import br.com.ite.models.Solicitation;
 import br.com.ite.utils.GlobalNames;
+import br.com.ite.utils.UserStorage;
 import br.com.ite.utils.network.ServiceGenerator;
 import br.com.xisvaldo.android.dialog.AndroidDialog;
 import okhttp3.MediaType;
@@ -133,7 +135,42 @@ public class SolicitationsFragment extends Fragment implements Serializable {
             }
         });
 
+        if (!getUserVisibleHint()) {
+            checkLogin();
+        }
+
         return fragment;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisible) {
+
+        if (isVisible && getActivity() != null) {
+            checkLogin();
+        }
+    }
+
+    private void checkLogin() {
+        if (!UserStorage.isLogged(getContext())) {
+            try {
+                AndroidDialog.show(getActivity(),
+                        AndroidDialog.Type.INFO,
+                        getString(R.string.app_name),
+                        getString(R.string.loginRequired),
+                        new Handler() {
+                            @Override
+                            public void handleMessage(Message msg) {
+                                super.handleMessage(msg);
+                                if (msg.what == AndroidDialog.Result.OK.ordinal()) {
+                                    ((BaseActivity) getActivity()).goBackToNews();
+                                }
+                            }
+                        }
+                );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void sendSolicitation(Solicitation selectedSolicitation) {

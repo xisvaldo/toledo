@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.ite">
+    package="br.com.ite"
+    android:versionCode="1"
+    android:versionName="v1.0.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -7,10 +9,11 @@
     <!--todo: check this <aplication >warning <action android:name="android.intent.action.VIEW"/>-->
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo_white"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppMaterialTheme">
+        android:theme="@style/AppMaterialTheme"
+        >
 
         <activity
             android:name=".activities.SplashActivity"

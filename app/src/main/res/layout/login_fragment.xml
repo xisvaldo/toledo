@@ -17,23 +17,11 @@
         android:src="@drawable/login_logo"
         />
 
-    <TextView
-        android:id="@+id/login_required"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login_logo"
-        android:text="@string/loginRequired"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:layout_centerHorizontal="true"
-        />
-
     <EditText
         android:id="@+id/login_student_id"
         android:layout_width="240dp"
         android:layout_height="45dp"
-        android:layout_below="@id/login_required"
+        android:layout_below="@id/login_logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:inputType="textEmailAddress"

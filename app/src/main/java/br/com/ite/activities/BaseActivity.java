@@ -20,8 +20,10 @@ import java.io.IOException;
 import br.com.ite.R;
 import br.com.ite.adapters.ViewPagerAdapter;
 import br.com.ite.fragments.GradesFragment;
+import br.com.ite.fragments.LoginFragment;
 import br.com.ite.fragments.NotificationsFragment;
 import br.com.ite.utils.PicassoUtils;
+import br.com.ite.utils.UserStorage;
 import br.com.xisvaldo.android.dialog.AndroidDialog;
 
 /**
@@ -60,12 +62,15 @@ public class BaseActivity extends AppCompatActivity {
         this.baseTabLayout = (TabLayout) findViewById(R.id.base_tabs);
         this.baseToolbar = (Toolbar) findViewById(R.id.base_toolbar);
 
-        baseToolbar.setNavigationIcon(R.drawable.logo_white);
-        baseToolbar.setTitle(getResources().getString(R.string.news));
-
+        final Drawable loginLogout = getResources().getDrawable(R.drawable.ic_login_logout);
+        loginLogout.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        baseToolbar.setNavigationIcon(loginLogout);
 
         setSupportActionBar(this.baseToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        baseToolbar.setTitle(getString(R.string.news));
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), getApplicationContext());
         this.baseViewPager.setAdapter(adapter);
@@ -83,27 +88,27 @@ public class BaseActivity extends AppCompatActivity {
                 switch (VIEW_PAGER_OPTIONS.getMenuOptionFromInt(tab.getPosition())) {
 
                     case NEWS:
-                        baseToolbar.setTitle(getResources().getString(R.string.news));
-                        baseToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.logo_white));
-                        baseToolbar.setNavigationOnClickListener(null);
+                        baseToolbar.setTitle(getString(R.string.news));
+                        baseToolbar.setNavigationIcon(loginLogout);
+                        baseToolbar.setNavigationOnClickListener(loginLogoutClick);
                         break;
 
                     case EVENTS:
                         baseToolbar.setTitle(getResources().getString(R.string.events));
                         baseToolbar.setNavigationIcon(backImage);
-                        baseToolbar.setNavigationOnClickListener(backToTimelineClick);
+                        baseToolbar.setNavigationOnClickListener(backToNewsClick);
                         break;
 
                     case GRADES:
                         baseToolbar.setTitle(getResources().getString(R.string.grades));
                         baseToolbar.setNavigationIcon(backImage);
-                        baseToolbar.setNavigationOnClickListener(backToTimelineClick);
+                        baseToolbar.setNavigationOnClickListener(backToNewsClick);
                         break;
 
                     case SOLICITATIONS:
                         baseToolbar.setTitle(getResources().getString(R.string.solicitations));
                         baseToolbar.setNavigationIcon(backImage);
-                        baseToolbar.setNavigationOnClickListener(backToTimelineClick);
+                        baseToolbar.setNavigationOnClickListener(backToNewsClick);
                         break;
 
                 }
@@ -119,9 +124,41 @@ public class BaseActivity extends AppCompatActivity {
 
             }
         });
+
+        baseToolbar.setNavigationOnClickListener(loginLogoutClick);
     }
 
-    private View.OnClickListener backToTimelineClick = new View.OnClickListener() {
+    private View.OnClickListener loginLogoutClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (UserStorage.isLogged(getApplicationContext())) {
+                try {
+                    AndroidDialog.show(BaseActivity.this,
+                            AndroidDialog.Type.QUESTION,
+                            getResources().getString(R.string.app_name),
+                            getResources().getString(R.string.logoutConfirmation),
+                            new Handler() {
+                                @Override
+                                public void handleMessage(Message msg) {
+                                    super.handleMessage(msg);
+
+                                    if (msg.what == AndroidDialog.Result.YES.ordinal()) {
+                                        logout();
+                                    }
+                                }
+                            }
+                    );
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                new LoginFragment().show(getSupportFragmentManager(), "LOGIN_FRAGMENT");
+            }
+        }
+    };
+
+    private View.OnClickListener backToNewsClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             baseViewPager.setCurrentItem(VIEW_PAGER_OPTIONS.NEWS.ordinal(), true);
@@ -142,19 +179,13 @@ public class BaseActivity extends AppCompatActivity {
                     instanceof GradesFragment) {
                 baseToolbar.setTitle(getResources().getString(R.string.grades));
             }
-           /* else if (getSupportFragmentManager().findFragmentByTag("LOGIN_FRAGMENT") != null) {
-                getSupportFragmentManager().beginTransaction()
-                        .remove(getSupportFragmentManager().findFragmentByTag("LOGIN_FRAGMENT"))
-                        .commit();
-            }*/
 
             getSupportFragmentManager().popBackStack();
             return;
         }
 
-        AndroidDialog dialog = new AndroidDialog();
         try {
-            dialog.show(this, AndroidDialog.Type.QUESTION, getString(R.string.app_name),
+            AndroidDialog.show(this, AndroidDialog.Type.QUESTION, getString(R.string.app_name),
                     getString(R.string.generalExit), new Handler() {
                         @Override
                         public void handleMessage(Message msg) {
@@ -183,9 +214,32 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        NotificationsFragment fragment = new NotificationsFragment();
-        fragment.show(getSupportFragmentManager(), "DIALOG");
+
+        if (!UserStorage.isLogged(getApplicationContext())) {
+
+            try {
+                AndroidDialog.show(this,
+                        AndroidDialog.Type.INFO,
+                        getString(R.string.app_name),
+                        getString(R.string.loginRequired),
+                        new Handler());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            NotificationsFragment fragment = new NotificationsFragment();
+            fragment.show(getSupportFragmentManager(), "DIALOG");
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void logout() {
+        UserStorage.clearData(getApplicationContext());
+    }
+
+    public void goBackToNews() {
+        baseViewPager.setCurrentItem(VIEW_PAGER_OPTIONS.NEWS.ordinal(), true);
     }
 }

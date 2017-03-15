@@ -14,13 +14,10 @@ import android.util.Log;
 
 import br.com.ite.R;
 import br.com.ite.activities.BaseActivity;
-import br.com.ite.fragments.ContainerGradesFragment;
-import br.com.ite.fragments.ContainerSolicitationsFragment;
 import br.com.ite.fragments.EventsFragment;
 import br.com.ite.fragments.GradesFragment;
 import br.com.ite.fragments.NewsFragment;
 import br.com.ite.fragments.SolicitationsFragment;
-import br.com.ite.utils.UserStorage;
 
 /**
  * Created by leonardo.borges on 09/08/2016.
@@ -52,24 +49,14 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return new EventsFragment();
 
             } else if (position == BaseActivity.VIEW_PAGER_OPTIONS.GRADES.ordinal()) {
-                if (!UserStorage.isLogged(context)) {
-                    return new ContainerGradesFragment();
-                }
-                else {
-                    return new GradesFragment();
-                }
+                return new GradesFragment();
+
             }
             else if (position == BaseActivity.VIEW_PAGER_OPTIONS.SOLICITATIONS.ordinal()) {
-                if (!UserStorage.isLogged(context)) {
-                    return new ContainerSolicitationsFragment();
-                }
-                else {
-                    return new SolicitationsFragment();
-                }
+                return new SolicitationsFragment();
             }
 
         } catch (Exception ex) {
-            Log.e("ViewPagerAdapter", "getItem()");
             ex.printStackTrace();
         }
 

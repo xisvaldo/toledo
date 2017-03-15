@@ -3,6 +3,8 @@ package br.com.ite.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,15 +19,19 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 import br.com.ite.R;
+import br.com.ite.activities.BaseActivity;
 import br.com.ite.adapters.GradesAdapter;
 import br.com.ite.interfaces.GradesAPI;
 import br.com.ite.interfaces.OnItemClickTransition;
 import br.com.ite.models.StudentGrades;
 import br.com.ite.utils.GlobalNames;
+import br.com.ite.utils.UserStorage;
 import br.com.ite.utils.network.ServiceGenerator;
+import br.com.xisvaldo.android.dialog.AndroidDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -87,7 +93,43 @@ public class GradesFragment extends Fragment implements OnItemClickTransition {
             }
         });
 
+        if (!getUserVisibleHint()) {
+            checkLogin();
+        }
+
         return fragment;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisible) {
+
+        if (isVisible && getActivity() != null) {
+            checkLogin();
+        }
+    }
+
+    private void checkLogin() {
+
+        if (!UserStorage.isLogged(getContext())) {
+            try {
+                AndroidDialog.show(getActivity(),
+                        AndroidDialog.Type.INFO,
+                        getString(R.string.app_name),
+                        getString(R.string.loginRequired),
+                        new Handler() {
+                            @Override
+                            public void handleMessage(Message msg) {
+                                super.handleMessage(msg);
+                                if (msg.what == AndroidDialog.Result.OK.ordinal()) {
+                                    ((BaseActivity) getActivity()).goBackToNews();
+                                }
+                            }
+                        }
+                );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

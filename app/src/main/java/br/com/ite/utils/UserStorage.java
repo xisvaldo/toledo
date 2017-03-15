@@ -34,4 +34,14 @@ public class UserStorage {
         userPassword = preferences.getString(GlobalNames.ITE_PREFERENCES_USER_PASSWORD, "");
         isLogged = preferences.getBoolean(GlobalNames.ITE_PREFERENCES_IS_LOGGED, false);
     }
+
+    public static void clearData(Context context) {
+        preferences = context.getSharedPreferences(GlobalNames.ITE_PREFERENCES, Context.MODE_PRIVATE);
+        preferences.edit().putString(GlobalNames.ITE_PREFERENCES_USER_ID, "").commit();
+        preferences.edit().putString(GlobalNames.ITE_PREFERENCES_USER_PASSWORD, "").commit();
+        preferences.edit().putBoolean(GlobalNames.ITE_PREFERENCES_IS_LOGGED, false).commit();
+        userId = "";
+        userPassword = "";
+        isLogged = false;
+    }
 }

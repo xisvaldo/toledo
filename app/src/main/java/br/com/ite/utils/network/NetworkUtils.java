@@ -31,16 +31,16 @@ public class NetworkUtils {
             NetworkInfo networkInfo = connection.getActiveNetworkInfo();
 
             if (networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                Log.i(activity.getApplicationContext()
+                /*Log.i(activity.getApplicationContext()
                         .getResources()
-                        .getString(R.string.app_name), "Network: DEVICE HAS INTERNET CONNECTION");
+                        .getString(R.string.app_name), "Network: DEVICE HAS INTERNET CONNECTION");*/
                 return true;
             }
         }
 
-        Log.w(activity.getApplicationContext()
+        /*Log.w(activity.getApplicationContext()
                 .getResources()
-                .getString(R.string.app_name), "Network: DEVICE HAS NO INTERNET CONNECTION");
+                .getString(R.string.app_name), "Network: DEVICE HAS NO INTERNET CONNECTION");*/
 
         AndroidDialog.show(activity,
                 AndroidDialog.Type.ERROR,

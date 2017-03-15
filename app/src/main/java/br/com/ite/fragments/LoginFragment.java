@@ -40,7 +40,7 @@ public class LoginFragment extends AppCompatDialogFragment {
     private EditText password;
     private boolean isShowingPassword = false;
     private boolean loginSucceed = false;
-    private OnLoginCallback callback;
+    private OnLoginCallback callback = null;
 
     public enum LOGIN_RESULT {
         SUCCESS,
@@ -72,8 +72,10 @@ public class LoginFragment extends AppCompatDialogFragment {
             }
         });
 
-        Bundle args = getArguments();
-        callback = (OnLoginCallback) args.getSerializable(GlobalNames.ITE_LOGIN_CALLBACK);
+        if (getArguments() != null) {
+            Bundle args = getArguments();
+            callback = (OnLoginCallback) args.getSerializable(GlobalNames.ITE_LOGIN_CALLBACK);
+        }
 
         return fragment;
     }
@@ -150,7 +152,9 @@ public class LoginFragment extends AppCompatDialogFragment {
 
     @Override
     public void onDismiss(final DialogInterface dialog) {
-        setCallback();
+        if (callback != null) {
+            setCallback();
+        }
     }
 
     private void setCallback() {

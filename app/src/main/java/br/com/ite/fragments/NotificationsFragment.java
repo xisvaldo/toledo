@@ -12,17 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import br.com.ite.R;
 import br.com.ite.adapters.NotificationsAdapter;
 import br.com.ite.interfaces.NotificationAPI;
-import br.com.ite.interfaces.OnLoginCallback;
 import br.com.ite.models.Notification;
 import br.com.ite.utils.GlobalNames;
 import br.com.ite.utils.RecyclerViewSeparator;
-import br.com.ite.utils.UserStorage;
 import br.com.ite.utils.network.ServiceGenerator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +28,7 @@ import retrofit2.Response;
 /**
  * Created by leonardo.borges on 13/03/2017.
  */
-public class NotificationsFragment extends AppCompatDialogFragment implements Serializable, OnLoginCallback {
+public class NotificationsFragment extends AppCompatDialogFragment {
 
     private View fragment;
     private ProgressBar loading;
@@ -46,7 +43,6 @@ public class NotificationsFragment extends AppCompatDialogFragment implements Se
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         fragment = inflater.inflate(R.layout.notifications_fragment, parent, false);
-        fragment.setVisibility(View.GONE);
 
         adapter = new NotificationsAdapter(this);
 
@@ -65,67 +61,35 @@ public class NotificationsFragment extends AppCompatDialogFragment implements Se
                         getResources().getColor(R.color.lightGray), 1f);
         notificationList.addItemDecoration(separator);
 
-        checkLogin();
+        SharedPreferences preferences = getActivity()
+                .getSharedPreferences(GlobalNames.ITE_PREFERENCES, Context.MODE_PRIVATE);
 
-        return fragment;
-    }
+        NotificationAPI notificationAPI = ServiceGenerator.createService(NotificationAPI.class);
+        Call<List<Notification>> call = notificationAPI
+                .getNotifications(preferences.getString(GlobalNames.ITE_PREFERENCES_USER_ID, ""));
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        if (isVisibleToUser && getActivity() != null) {
-            checkLogin();
-        }
-    }
-
-    private void checkLogin() {
-        if (!UserStorage.isLogged(getActivity().getApplicationContext())) {
-            Bundle args = new Bundle();
-            args.putSerializable(GlobalNames.ITE_LOGIN_CALLBACK, this);
-
-            LoginFragment login = new LoginFragment();
-            login.setArguments(args);
-
-            login.show(getFragmentManager(), "LOGIN");
-        }
-        else if (UserStorage.isLogged(getActivity().getApplicationContext())) {
-            onLoginComplete(LoginFragment.LOGIN_RESULT.SUCCESS);
-        }
-    }
-
-    @Override
-    public void onLoginComplete(LoginFragment.LOGIN_RESULT result) {
-
-        if (result == LoginFragment.LOGIN_RESULT.SUCCESS) {
-            fragment.setVisibility(View.VISIBLE);
-
-            SharedPreferences preferences = getActivity()
-                    .getSharedPreferences(GlobalNames.ITE_PREFERENCES, Context.MODE_PRIVATE);
-
-            NotificationAPI notificationAPI = ServiceGenerator.createService(NotificationAPI.class);
-            Call<List<Notification>> call = notificationAPI
-                    .getNotifications(preferences.getString(GlobalNames.ITE_PREFERENCES_USER_ID, ""));
-
-            call.enqueue(new Callback<List<Notification>>() {
-                @Override
-                public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
-                    if (response.isSuccessful()) {
-                        adapter.setData(response.body());
-                        adapter.notifyDataSetChanged();
-                        loading.setVisibility(View.GONE);
-                        empty.setVisibility(View.GONE);
-                    }
-                    else {
-                        loading.setVisibility(View.GONE);
-                        empty.setVisibility(View.VISIBLE);
-                    }
+        call.enqueue(new Callback<List<Notification>>() {
+            @Override
+            public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
+                if (response.isSuccessful()) {
+                    adapter.setData(response.body());
+                    adapter.notifyDataSetChanged();
+                    loading.setVisibility(View.GONE);
+                    empty.setVisibility(View.GONE);
                 }
-
-                @Override
-                public void onFailure(Call<List<Notification>> call, Throwable t) {
+                else {
                     loading.setVisibility(View.GONE);
                     empty.setVisibility(View.VISIBLE);
                 }
-            });
-        }
+            }
+
+            @Override
+            public void onFailure(Call<List<Notification>> call, Throwable t) {
+                loading.setVisibility(View.GONE);
+                empty.setVisibility(View.VISIBLE);
+            }
+        });
+
+        return fragment;
     }
 }
